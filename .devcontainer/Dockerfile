@@ -15,7 +15,7 @@ ARG USER_GID=$USER_UID
 
 # Copy environment.yml (if found) to a temp locaition so we update the environment. Also
 # copy "noop.txt" so the COPY instruction does not fail if no environment.yml exists.
-COPY environment.yml* .devcontainer/noop.txt /tmp/conda-tmp/
+COPY environment.yml* .devcontainer/noop.txt post_install.sh /tmp/conda-tmp/
 
 # Configure apt and install packages
 RUN apt-get update \
@@ -43,4 +43,6 @@ RUN apt-get update \
     # Clean up
     && apt-get autoremove -y \
     && apt-get clean -y \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && chmod +x /tmp/conda-tmp/post_install.sh && \
+    /tmp/conda-tmp/post_install.sh
