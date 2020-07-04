@@ -30,7 +30,6 @@ RUN apt-get update \
     #
     # Update Python environment based on environment.yml (if present)
     && if [ -f "/tmp/conda-tmp/environment.yml" ]; then /opt/conda/bin/conda env update -n base -f /tmp/conda-tmp/environment.yml; fi \
-    && rm -rf /tmp/conda-tmp \
     #
     # Create a non-root user to use if preferred - see https://aka.ms/vscode-remote/containers/non-root-user.
     && groupadd --gid $USER_GID $USERNAME \
@@ -45,4 +44,6 @@ RUN apt-get update \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/* \
     && chmod +x /tmp/conda-tmp/post_install.sh && \
-    /tmp/conda-tmp/post_install.sh
+    /tmp/conda-tmp/post_install.sh \
+    && rm -rf /tmp/conda-tmp
+
