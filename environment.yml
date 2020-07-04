@@ -1,4 +1,4 @@
-name: basic
+name: base
 channels:
 - defaults
 - conda-forge
@@ -7,3 +7,10 @@ dependencies:
 - matplotlib
 - numpy
 - pandas
+- jupyterlab
+- ipywidgets 
+- bqplot 
+- nodejs
+- ipyleaflet
+- networkx
+- pythreejs
